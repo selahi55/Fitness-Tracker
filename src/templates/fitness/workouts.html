@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        img {
+            width: 100px;
+            height: 200px;
+        }
+    </style>
+    <div class="container text-center">
+        <h2 style="color: red; padding-top: 15px;">Workout List</h2>
+        <a href="{% url 'create_new_workout' %}"><button type="button" class="btn btn-primary btn-lg">Make New Workout</button></a>
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            {% for workout in workouts %}
+            <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem; padding: 20px; align-items: center;">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'workout_detail' workout.name %}">{{ workout.name }}</a></h5>
+                    <b><p class="card-text">Focus:</b> {{ workout.get_focus_display }}</p>
+                    {% if workout.exercises %}
+                    <b>Exercises:</b>{% for exercise in workout.exercises.all %}
+                    <p class="card-text">{{ exercise.name }}{% if not loop.last %}, {% endif %}</p>
+                    {% endfor %}
+                    {% endif %}
+                    <a href="{% url 'delete_workout' workout.id %}"><button type="button" class="btn btn-danger btn-lg">Delete Workout</button></a>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock content %}

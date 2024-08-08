@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    img {
+        width: 600px;
+        height: auto;
+    }
+</style>
+<div class="container text-center">
+    <h2 style="color: red; padding-top: 15px;">{{ workout.name }}</h2>
+    <div class="justify-content-center">
+        <h6>Focus: {{ workout.get_focus_display }}</h6>
+        <h6>Exercises:</h6>
+        <div class="container my-4">
+            <div class="row justify-content-center">
+                {% for exercise in workout.exercises.all %}
+                <div class="col-md-4 mb-3">
+                <div class="card" style="width: 18rem; padding: 20px; align-items: center;">
+                    <img class="card-img-top" src="{{ exercise.image.url }}">
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="{% url 'exercise_detail' exercise.name %}">{{ exercise.name }}</a></h5>
+                      <p class="card-text">{{ exercise.description }}</p>
+                    </div>
+                </div>
+            </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

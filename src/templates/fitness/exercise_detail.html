@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        img {
+            width: 600px;
+            height: auto;
+        }
+    </style>
+    <div class="container text-center">
+        <h2 style="color: red; padding-top: 15px;">Exercise</h2>
+    <div>
+        <h4>Name: {{ exercise.name }}</h4>
+        <h6>Description: {{ exercise.description }}</h6>
+        <h6>Type: {{ exercise.get_type_display }}</h6>
+        <img src="{{ exercise.image.url }}" alt="Exercise Image">
+        <h6>Equipment: {{ exercise.get_equipment_display }}</h6>
+        {% if exercise.weight %}
+            <h6>Weight: {{ exercise.weight }}</h6>
+        {% else %}
+        {% endif %}
+    </div>
+    </div>
+{% endblock content %}
